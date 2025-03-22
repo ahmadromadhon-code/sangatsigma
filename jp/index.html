@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tebak Huruf Jepang</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #f3f4f6;
+            --success: #10b981;
+            --danger: #ef4444;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --radius-md: 12px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            color: var(--text-primary);
+        }
+
+        .mode-container {
+            display: grid;
+            gap: 1.5rem;
+            max-width: 800px;
+            width: 100%;
+            margin: 2rem 0;
+        }
+
+        .mode-btn {
+            padding: 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: var(--radius-md);
+            background: white;
+            color: var(--primary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow-sm);
+            border: 2px solid var(--primary);
+        }
+
+        .mode-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            background: var(--primary);
+            color: white;
+        }
+
+        .category-container {
+            display: grid;
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 800px;
+            position: relative;
+            order: -1;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: all 0.2s ease;
+            order: 1;
+            /* Memastikan kategori di atas tombol mulai */
+        }
+
+        /* Tambahkan ini untuk spacing */
+        .category-container>.mode-btn {
+            margin-top: 2rem;
+            order: 2;
+        }
+
+        .category-header {
+            width: 100%;
+            padding: 1.5rem;
+            border: none;
+            background: transparent;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .category-header::after {
+            content: '▼';
+            display: inline-block;
+            transition: transform 0.5s ease;
+            font-family: 'Arial', sans-serif;
+            /* Pastikan font konsisten */
+        }
+
+        .category-header.expanded::after {
+            transform: rotate(180deg);
+        }
+
+        .groups-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.75rem;
+            padding: 0 1.5rem 1.5rem;
+            display: none;
+        }
+
+        .groups-container.show {
+            display: grid;
+        }
+
+        .group-btn {
+            padding: 0.75rem;
+            border: 2px solid var(--secondary);
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-primary);
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .group-btn.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            padding-left: 2.5rem;
+        }
+
+        .group-btn.selected::before {
+            content: '✓';
+            position: absolute;
+            left: 0.75rem;
+            font-weight: 700;
+        }
+
+        .game-container {
+            display: none;
+            width: 100%;
+            max-width: 800px;
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .character-display {
+            font-size: 10rem;
+            text-align: center;
+            margin: 3rem 0;
+            color: var(--primary);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .option-btn {
+            padding: 1.25rem;
+            font-size: 1rem;
+            border: 2px solid var(--secondary);
+            border-radius: var(--radius-md);
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .option-btn.correct {
+            background: var(--success);
+            color: white;
+            border-color: var(--success);
+            animation: bounce 0.5s ease;
+        }
+
+        .option-btn.wrong {
+            background: var(--danger);
+            color: white;
+            border-color: var(--danger);
+            animation: shake 0.4s ease;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(8px);
+            }
+
+            75% {
+                transform: translateX(-8px);
+            }
+        }
+
+        .result-screen {
+            display: none;
+            text-align: center;
+            background: white;
+            padding: 3rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .stats-container {
+            background: var(--secondary);
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            margin: 2rem 0;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .stats-container p {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            display: flex;
+            justify-content: space-between;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .retry-btn {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin: 0.5rem;
+        }
+
+        .retry-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        @media (max-width: 640px) {
+            .character-display {
+                font-size: 6rem;
+                margin: 2rem 0;
+            }
+
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+
+            .mode-btn,
+            .retry-btn {
+                width: 100%;
+            }
+
+            .features-container {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                padding: 1rem;
+            }
+        }
+
+        .home-container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .features-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .feature-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .back-btn {
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--primary);
+            border-radius: var(--radius-md);
+            background: var(--secondary);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 1rem 0;
+            /* Tambahkan margin vertikal */
+            box-shadow: var(--shadow-sm);
+            width: 100%;
+            /* Agar tombol full width */
+            justify-content: center;
+            /* Rata tengah teks */
+            font-weight: 600;
+            /* Tambahkan ketebalan font */
+        }
+
+        .back-btn:hover {
+            background: #e2e8f0;
+            transform: translateY(-2px);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 0rem;
+            grid-column: 1/-1;
+            color: var(--text-primary);
+        }
+
+        .category-section {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            max-width: 800px;
+            margin: 1rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            text-align: center;
+        }
+
+        .category-instruction {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .error-notification {
+            position: fixed;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--danger);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease-in-out;
+            z-index: 9999;
+            /* Pastikan z-index tertinggi */
+            opacity: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .error-notification.show {
+            top: 20px;
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Halaman Utama -->
+    <div class="home-container" id="homeContainer">
+        <div class="header">
+            <h1>Kuis Huruf Jepang</h1>
+            <p>Belajar Hiragana dan Katakana dengan Metode Interaktif</p>
+        </div>
+
+        <div class="features-container">
+            <div class="feature-card">
+                <h3>🎌 Hiragana</h3>
+                <p>46 karakter dasar untuk penulisan kata asli Jepang</p>
+            </div>
+            <div class="feature-card">
+                <h3>🎎 Katakana</h3>
+                <p>46 karakter untuk kata serapan asing dan nama khusus</p>
+            </div>
+        </div>
+
+        <button class="mode-btn start-btn" onclick="showScriptSelection()">
+            Mulai Belajar
+        </button>
+    </div>
+
+    <!-- Halaman Pemilihan Script -->
+    <div class="mode-container" id="modeContainer">
+        <h2 class="section-title">Pilih Jenis Huruf</h2>
+        <button class="mode-btn" onclick="selectScript('hiragana')">
+            <span class="script-icon">あ</span> Hiragana
+        </button>
+        <button class="mode-btn" onclick="selectScript('katakana')">
+            <span class="script-icon">ア</span> Katakana
+        </button>
+        <button class="back-btn" onclick="showHome()">&larr; Kembali</button>
+    </div>
+
+    <!-- Halaman Kategori -->
+    <div class="category-section" id="categorySection">
+        <h2 class="category-title"></h2>
+        <p class="category-instruction"></p>
+        <div class="category-container" id="categoryContainer"></div>
+        <button class="back-btn" onclick="showScriptSelection()">&larr; Kembali</button>
+    </div>
+
+    <!-- Halaman Permainan -->
+    <div class="game-container">
+        <div class="score-board">
+            <span>Benar : <span id="correctCount"> 0</span></span>
+            <span>Salah : <span id="wrongCount"> 0</span></span>
+        </div>
+        <div class="character-display" id="character"></div>
+        <div class="options-container" id="options"></div>
+    </div>
+
+    <!-- Halaman Hasil -->
+    <div class="result-screen" id="resultScreen">
+        <h2>Hasil Akhir!</h2>
+        <div class="stats-container">
+            <p>Total Benar : <span id="finalCorrect"> 0</span></p>
+            <p>Total Salah : <span id="finalWrong"> 0</span></p>
+            <p>Akurasi : <span id="accuracy"> 0</span>%</p>
+        </div>
+        <button class="retry-btn" onclick="showCategorySelection()">Main Lagi</button>
+        <button class="retry-btn" onclick="showHome()">Kembali ke Halaman Utama</button>
+    </div>
+
+    <!-- Notifikasi Error -->
+    <div class="error-notification" id="errorNotification">
+        <span>⚠️ Pilih minimal satu kelompok karakter!</span>
+    </div>
+
+
+    <script>
+        const hiraganaGroups = {
+            basic: {
+                'Vokal': { 'あ': 'a', 'い': 'i', 'う': 'u', 'え': 'e', 'お': 'o' },
+                'K-': { 'か': 'ka', 'き': 'ki', 'く': 'ku', 'け': 'ke', 'こ': 'ko' },
+                'S-': { 'さ': 'sa', 'し': 'shi', 'す': 'su', 'せ': 'se', 'そ': 'so' },
+                'T-': { 'た': 'ta', 'ち': 'chi', 'つ': 'tsu', 'て': 'te', 'と': 'to' },
+                'N-': { 'な': 'na', 'に': 'ni', 'ぬ': 'nu', 'ね': 'ne', 'の': 'no', 'ん': 'n' },
+                'H-': { 'は': 'ha', 'ひ': 'hi', 'ふ': 'fu', 'へ': 'he', 'ほ': 'ho' },
+                'M-': { 'ま': 'ma', 'み': 'mi', 'む': 'mu', 'め': 'me', 'も': 'mo' },
+                'Y-': { 'や': 'ya', 'ゆ': 'yu', 'よ': 'yo' },
+                'R-': { 'ら': 'ra', 'り': 'ri', 'る': 'ru', 'れ': 're', 'ろ': 'ro' },
+                'W-': { 'わ': 'wa', 'を': 'o' }
+            },
+
+            dakuten: {
+                'G-': { 'が': 'ga', 'ぎ': 'gi', 'ぐ': 'gu', 'げ': 'ge', 'ご': 'go' },
+                'Z-': { 'ざ': 'za', 'じ': 'ji', 'ず': 'zu', 'ぜ': 'ze', 'ぞ': 'zo' },
+                'D-': { 'だ': 'da', 'ぢ': 'ji', 'づ': 'zu', 'で': 'de', 'ど': 'do' },
+                'B-': { 'ば': 'ba', 'び': 'bi', 'ぶ': 'bu', 'べ': 'be', 'ぼ': 'bo' },
+                'P-': { 'ぱ': 'pa', 'ぴ': 'pi', 'ぷ': 'pu', 'ぺ': 'pe', 'ぽ': 'po' }
+            }
+        };
+
+        const katakanaGroups = {
+            basic: {
+                'Vokal': { 'ア': 'a', 'イ': 'i', 'ウ': 'u', 'エ': 'e', 'オ': 'o' },
+                'K-': { 'カ': 'ka', 'キ': 'ki', 'ク': 'ku', 'ケ': 'ke', 'コ': 'ko' },
+                'S-': { 'サ': 'sa', 'シ': 'shi', 'ス': 'su', 'セ': 'se', 'ソ': 'so' },
+                'T-': { 'タ': 'ta', 'チ': 'chi', 'ツ': 'tsu', 'テ': 'te', 'ト': 'to' },
+                'N-': { 'ナ': 'na', 'ニ': 'ni', 'ヌ': 'nu', 'ネ': 'ne', 'ノ': 'no', 'ン': 'n' },
+                'H-': { 'ハ': 'ha', 'ヒ': 'hi', 'フ': 'fu', 'ヘ': 'he', 'ホ': 'ho' },
+                'M-': { 'マ': 'ma', 'ミ': 'mi', 'ム': 'mu', 'メ': 'me', 'モ': 'mo' },
+                'Y-': { 'ヤ': 'ya', 'ユ': 'yu', 'ヨ': 'yo' },
+                'R-': { 'ラ': 'ra', 'リ': 'ri', 'ル': 'ru', 'レ': 're', 'ロ': 'ro' },
+                'W-': { 'ワ': 'wa', 'ヲ': 'o' }
+            },
+            dakuten: {
+                'G-': { 'ガ': 'ga', 'ギ': 'gi', 'グ': 'gu', 'ゲ': 'ge', 'ゴ': 'go' },
+                'Z-': { 'ザ': 'za', 'ジ': 'ji', 'ズ': 'zu', 'ゼ': 'ze', 'ゾ': 'zo' },
+                'D-': { 'ダ': 'da', 'ヂ': 'ji', 'ヅ': 'zu', 'デ': 'de', 'ド': 'do' },
+                'B-': { 'バ': 'ba', 'ビ': 'bi', 'ブ': 'bu', 'ベ': 'be', 'ボ': 'bo' },
+                'P-': { 'パ': 'pa', 'ピ': 'pi', 'プ': 'pu', 'ペ': 'pe', 'ポ': 'po' }
+            },
+            extended: {
+                'V-': { 'ヴ': 'vu' },
+                'W-': { 'ウィ': 'wi', 'ウェ': 'we', 'ウォ': 'wo' },
+                'SH-': { 'シェ': 'she' },
+                'J-': { 'ジェ': 'je' },
+                'CH-': { 'チェ': 'che', 'ティ': 'ti', 'ディ': 'di' },
+                'T-': { 'トゥ': 'tu', 'ドゥ': 'du' },
+                'F-': { 'ファ': 'fa', 'フィ': 'fi', 'フェ': 'fe', 'フォ': 'fo' }
+            }
+        };
+
+        // Variabel State
+        let currentSet = {};
+        let questionQueue = [];
+        let correctCount = 0;
+        let wrongCount = 0;
+        let currentScript = '';
+        let totalQuestions = 0;
+        let currentCorrectAnswer = '';
+
+        // Fungsi Navigasi
+        function showHome() {
+            currentSet = {};
+            questionQueue = [];
+            document.getElementById('homeContainer').style.display = 'block';
+            document.querySelector('.mode-container').style.display = 'none';
+            document.getElementById('categorySection').style.display = 'none';
+            document.querySelector('.game-container').style.display = 'none';
+            document.getElementById('resultScreen').style.display = 'none';
+        }
+
+        function showScriptSelection() {
+            document.getElementById('homeContainer').style.display = 'none';
+            document.querySelector('.mode-container').style.display = 'grid';
+            document.getElementById('categorySection').style.display = 'none';
+        }
+
+        function selectScript(script) {
+            currentScript = script;
+            document.querySelector('.mode-container').style.display = 'none';
+            showCategorySelection();
+        }
+
+        // Fungsi Kategori
+        function showCategorySelection() {
+            document.querySelector('.game-container').style.display = 'none';
+            document.getElementById('resultScreen').style.display = 'none';
+            document.getElementById('categorySection').style.display = 'block';
+
+            const container = document.getElementById('categoryContainer');
+            container.innerHTML = `
+        <h2 class="category-title">Pilih Kategori ${currentScript.toUpperCase()}</h2>
+        <p class="category-instruction">Pilih minimal satu untuk mulai belajar</p>
+    `;
+
+            // Render kategori
+            const categories = currentScript === 'hiragana'
+                ? Object.keys(hiraganaGroups)
+                : Object.keys(katakanaGroups);
+
+            categories.forEach(category => {
+                const card = document.createElement('div');
+                card.className = 'category-card';
+
+                const categoryBtn = document.createElement('button');
+                categoryBtn.className = 'category-header';
+                categoryBtn.innerHTML = `
+            ${category.toUpperCase()}
+        `;
+                categoryBtn.onclick = () => toggleCategoryGroups(card);
+
+                const groupsContainer = document.createElement('div');
+                groupsContainer.className = 'groups-container';
+
+                // Render kelompok
+                Object.keys(getCategoryGroups(category)).forEach(group => {
+                    const groupBtn = document.createElement('button');
+                    groupBtn.className = 'group-btn';
+                    groupBtn.textContent = group;
+                    groupBtn.onclick = () => toggleGroupSelection(group, category, groupBtn);
+                    groupsContainer.appendChild(groupBtn);
+                });
+
+                card.appendChild(categoryBtn);
+                card.appendChild(groupsContainer);
+                container.appendChild(card);
+            });
+
+            // Tambah tombol mulai
+            container.insertAdjacentHTML('beforeend', `
+        <button class="mode-btn" onclick="startGame()">
+            Mulai Permainan
+        </button>
+    `);
+        }
+
+        function toggleCategoryGroups(card) {
+            const header = card.querySelector('.category-header');
+            const groupsContainer = card.querySelector('.groups-container');
+            header.classList.toggle('expanded');
+            groupsContainer.classList.toggle('show');
+        }
+
+        function toggleGroupSelection(group, category, element) {
+            element.classList.toggle('selected');
+
+            if (!currentSet[category]) currentSet[category] = [];
+            const index = currentSet[category].indexOf(group);
+
+            if (index > -1) {
+                currentSet[category].splice(index, 1);
+            } else {
+                currentSet[category].push(group);
+            }
+        }
+
+        function getCategoryGroups(category) {
+            return currentScript === 'hiragana'
+                ? hiraganaGroups[category]
+                : katakanaGroups[category];
+        }
+
+        // Fungsi Game
+        function startGame() {
+            const selectedGroups = {};
+            let totalSelected = 0;
+
+            Object.keys(currentSet).forEach(category => {
+                currentSet[category].forEach(group => {
+                    const groups = getCategoryGroups(category)[group];
+                    Object.assign(selectedGroups, groups);
+                    totalSelected++;
+                });
+            });
+
+            // Periksa apakah ada grup yang dipilih
+            const selectedKeys = Object.keys(selectedGroups);
+            if (selectedKeys.length === 0) {
+                showErrorNotification();
+                return;
+            }
+
+            totalQuestions = selectedKeys.length;
+            questionQueue = shuffleArray([...selectedKeys]);
+
+            document.getElementById('categorySection').style.display = 'none';
+            document.querySelector('.game-container').style.display = 'block';
+            resetCounters();
+            generateQuestion();
+        }
+
+        // Tambahkan fungsi notifikasi error
+        function showErrorNotification() {
+            const errorNotif = document.getElementById('errorNotification');
+            errorNotif.classList.add('show');
+
+            setTimeout(() => {
+                errorNotif.classList.remove('show');
+            }, 3000);
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function resetCounters() {
+            correctCount = 0;
+            wrongCount = 0;
+            document.getElementById('correctCount').textContent = '0';
+            document.getElementById('wrongCount').textContent = '0';
+        }
+
+        function generateQuestion() {
+            if (questionQueue.length === 0) return endGame();
+
+            const currentChar = questionQueue.pop();
+            currentCorrectAnswer = currentScript === 'hiragana'
+                ? findRomaji(currentChar, hiraganaGroups)
+                : findRomaji(currentChar, katakanaGroups);
+
+            document.getElementById('character').textContent = currentChar;
+
+            // Generate opsi jawaban
+            const options = [currentCorrectAnswer];
+            const allAnswers = Object.values(getAllSelectedAnswers());
+
+            while (options.length < 4) {
+                const randomAnswer = allAnswers[Math.floor(Math.random() * allAnswers.length)];
+                if (!options.includes(randomAnswer)) options.push(randomAnswer);
+            }
+
+            options.sort(() => Math.random() - 0.5);
+
+            // Render opsi
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = options.map(option => `
+        <button class="option-btn" onclick="checkAnswer(${option === currentCorrectAnswer}, this)">
+            ${option}
+        </button>
+    `).join('');
+        }
+
+        function findRomaji(char, scriptData) {
+            for (const category of Object.values(scriptData)) {
+                for (const group of Object.values(category)) {
+                    if (group[char]) return group[char];
+                }
+            }
+            return '';
+        }
+
+        function getAllSelectedAnswers() {
+            const allAnswers = {};
+            Object.keys(currentSet).forEach(category => {
+                currentSet[category].forEach(group => {
+                    Object.assign(allAnswers, getCategoryGroups(category)[group]);
+                });
+            });
+            return allAnswers;
+        }
+
+        function checkAnswer(isCorrect, element) {
+            const options = document.querySelectorAll('.option-btn');
+            options.forEach(btn => btn.disabled = true);
+
+            if (isCorrect) {
+                correctCount++;
+                document.getElementById('correctCount').textContent = correctCount;
+                element.classList.add('correct');
+            } else {
+                wrongCount++;
+                document.getElementById('wrongCount').textContent = wrongCount;
+                element.classList.add('wrong');
+
+                // Tunjukkan jawaban benar dengan warna hijau
+                options.forEach(btn => {
+                    // Gunakan trim() untuk menghapus spasi/enter tidak perlu
+                    if (btn.textContent.trim() === currentCorrectAnswer) {
+                        btn.classList.add('correct');
+                    }
+                });
+            }
+
+            setTimeout(() => {
+                correctCount + wrongCount < totalQuestions
+                    ? generateQuestion()
+                    : endGame();
+            }, 1500);
+        }
+        function endGame() {
+            document.querySelector('.game-container').style.display = 'none';
+            const resultScreen = document.getElementById('resultScreen');
+            resultScreen.style.display = 'block';
+
+            const accuracy = totalQuestions > 0
+                ? ((correctCount / totalQuestions) * 100).toFixed(2)
+                : 0;
+
+            document.getElementById('finalCorrect').textContent = correctCount;
+            document.getElementById('finalWrong').textContent = wrongCount;
+            document.getElementById('accuracy').textContent = accuracy;
+        }
+
+        // Inisialisasi
+        showHome();
+
+        // Blokir klik kanan
+        document.oncontextmenu = () => false;
+
+        // Blokir F12, Ctrl+Shift+I, Ctrl+Shift+J
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['I', 'J'].includes(e.key))) {
+                e.preventDefault();
+                window.location.href = 'about:blank';
+            }
+        });
+
+        // Deteksi resize window (banyak devtools membuka panel samping)
+        let width = window.innerWidth;
+        setInterval(() => {
+            if (window.innerWidth !== width) {
+                document.body.innerHTML = '<h1>Stop Inspecting!</h1>';
+                width = window.innerWidth;
+            }
+        }, 100);
+    </script>
+</body>
+
+</html>
