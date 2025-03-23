@@ -2,23 +2,26 @@ body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
+    background-color: #f4f7fc;
     color: #333;
 }
 
 header {
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
     color: white;
     text-align: center;
     padding: 3rem;
-    font-size: 1.5rem;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 nav {
-    background: #1e3c72;
+    background: #203a43;
     text-align: center;
     padding: 1rem;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 nav ul {
@@ -34,23 +37,24 @@ nav ul li a {
     color: white;
     text-decoration: none;
     font-weight: bold;
-    padding: 10px 15px;
+    padding: 10px 20px;
     transition: 0.3s;
+    border-radius: 5px;
 }
 
 nav ul li a:hover {
-    background: #2a5298;
-    border-radius: 5px;
+    background: #2c5364;
+    transform: scale(1.1);
 }
 
 section {
     max-width: 900px;
-    margin: 30px auto;
+    margin: 40px auto;
     background: white;
-    padding: 25px;
+    padding: 30px;
     border-radius: 12px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
 }
 
 section:hover {
@@ -58,24 +62,28 @@ section:hover {
 }
 
 .project {
-    background: #f0f4ff;
-    padding: 15px;
-    margin: 15px 0;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #eef2f3, #d9e2ec);
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: 0.3s;
+    cursor: pointer;
 }
 
 .project:hover {
-    background: #d6e4ff;
+    background: linear-gradient(135deg, #cfd9df, #e2ebf0);
     transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
 footer {
     text-align: center;
-    padding: 15px;
-    background: #1e3c72;
+    padding: 20px;
+    background: #0f2027;
     color: white;
-    margin-top: 30px;
-    font-size: 0.9rem;
+    margin-top: 40px;
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
