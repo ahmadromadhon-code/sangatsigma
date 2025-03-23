@@ -1,20 +1,22 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #f0f0f5;
     color: #333;
 }
 
 header {
-    background-color: #222;
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
     color: white;
     text-align: center;
-    padding: 2rem;
+    padding: 3rem;
+    font-size: 1.5rem;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 nav {
-    background: #333;
+    background: #444;
     text-align: center;
     padding: 1rem;
 }
@@ -22,39 +24,58 @@ nav {
 nav ul {
     list-style: none;
     padding: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin: 0 15px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
 
 nav ul li a {
     color: white;
     text-decoration: none;
     font-weight: bold;
+    padding: 10px 15px;
+    transition: 0.3s;
+}
+
+nav ul li a:hover {
+    background: #6e8efb;
+    border-radius: 5px;
 }
 
 section {
-    max-width: 800px;
-    margin: 20px auto;
+    max-width: 900px;
+    margin: 30px auto;
     background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+section:hover {
+    transform: scale(1.02);
 }
 
 .project {
-    background: #eee;
+    background: #eef;
     padding: 15px;
-    margin: 10px 0;
-    border-radius: 5px;
+    margin: 15px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+}
+
+.project:hover {
+    background: #dfe9f3;
+    transform: translateY(-5px);
 }
 
 footer {
     text-align: center;
-    padding: 10px;
-    background: #222;
+    padding: 15px;
+    background: #333;
     color: white;
-    margin-top: 20px;
+    margin-top: 30px;
+    font-size: 0.9rem;
 }
