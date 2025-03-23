@@ -31,6 +31,7 @@ nav ul {
     display: flex;
     justify-content: center;
     gap: 20px;
+    flex-wrap: wrap;
 }
 
 nav ul li a {
@@ -40,6 +41,7 @@ nav ul li a {
     padding: 10px 20px;
     transition: 0.3s;
     border-radius: 5px;
+    display: block;
 }
 
 nav ul li a:hover {
@@ -48,7 +50,7 @@ nav ul li a:hover {
 }
 
 section {
-    max-width: 900px;
+    max-width: 90%;
     margin: 40px auto;
     background: white;
     padding: 30px;
@@ -86,4 +88,47 @@ footer {
     font-size: 1rem;
     font-weight: bold;
     letter-spacing: 1px;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    header {
+        font-size: 1.5rem;
+        padding: 2rem;
+    }
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+    section {
+        padding: 20px;
+    }
+    .project {
+        padding: 15px;
+    }
+    footer {
+        font-size: 0.9rem;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        font-size: 1.2rem;
+        padding: 1.5rem;
+    }
+    nav ul {
+        flex-direction: column;
+        gap: 5px;
+    }
+    section {
+        padding: 15px;
+    }
+    .project {
+        padding: 10px;
+    }
+    footer {
+        font-size: 0.8rem;
+        padding: 10px;
+    }
 }
