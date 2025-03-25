@@ -48,10 +48,6 @@ header{
 .logo:hover{
     transform: scale(1.1);
 }
-.hamburger {
-    font-size: 30px;
-    cursor: pointer;
-    display: none;
 
 nav a{
     font-size: 1.8rem;
