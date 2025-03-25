@@ -380,8 +380,8 @@ span{
 }
 .kotlin {
     width: 80%;
-    animation: react 2s;
-    -webkit-animation: react 2s;
+    animation: kotlin 2s;
+    -webkit-animation: kotlin 2s;
 }
 
 
