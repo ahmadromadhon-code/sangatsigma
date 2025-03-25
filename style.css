@@ -374,7 +374,7 @@ span{
 }
 
 .react {
-    width: 80%;
+    width: 50%;
     animation: react 2s;
     -webkit-animation: react 2s;
 }
