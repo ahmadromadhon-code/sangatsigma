@@ -438,7 +438,7 @@ span{
 }
 
 .experience {
-    background-color: black;
+    background-color: #161616;
     padding: 5rem 9%;
 }
 
@@ -617,7 +617,7 @@ span{
 
 /* Contact Section */
 .contact {
-    background-color: #161616;
+    background-color: black;
     padding: 8rem 9% 5rem;
 }
 
