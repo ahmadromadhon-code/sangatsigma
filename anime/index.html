@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnimeTitle Finder - Dual Search</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-film"></i>
+                <h1>AnimeTitle Finder</h1>
+            </div>
+            <p class="tagline">Choose your search method to identify anime</p>
+        </header>
+
+        <main>
+            <div class="search-options">
+                <button class="search-option active" id="geminiOption">
+                    <i class="fas fa-robot"></i> Gemini AI Search
+                </button>
+                <button class="search-option" id="traceMoeOption">
+                    <i class="fas fa-search"></i> trace.moe Search
+                </button>
+            </div>
+
+            <div class="upload-container">
+                <div class="upload-area" id="uploadArea">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h3>Drag & Drop Image Here</h3>
+                    <p>or click to browse files</p>
+                    <input type="file" id="fileInput" accept="image/*">
+                </div>
+                <div class="preview-container hidden" id="previewContainer">
+                    <div class="image-preview" id="imagePreview"></div>
+                    <div class="search-buttons">
+                        <button class="analyze-btn gemini-btn" id="geminiBtn">
+                            <i class="fas fa-robot"></i> Search with Gemini
+                        </button>
+                        <button class="analyze-btn tracemoe-btn" id="traceMoeBtn">
+                            <i class="fas fa-search"></i> Search with trace.moe
+                        </button>
+                        <button class="change-btn" id="changeBtn">
+                            <i class="fas fa-sync-alt"></i> Change Image
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="results-container hidden" id="resultsContainer">
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p id="loadingText">Analyzing your image...</p>
+                </div>
+                <div class="results hidden" id="results">
+                    <h2 id="resultsTitle">Search Results</h2>
+                    <div class="api-used">
+                        <span id="apiBadge" class="gemini-badge">Gemini AI</span>
+                        <span id="confidenceBadge" class="confidence-badge hidden">90% confidence</span>
+                    </div>
+                    <div class="result-card" id="resultCard">
+                        <div class="result-image">
+                            <img id="resultAnimeImage" src="" alt="Anime Image">
+                        </div>
+                        <div class="result-info">
+                            <h3 id="resultTitle">Anime Title</h3>
+                            <div class="meta-info">
+                                <span id="resultType"><i class="fas fa-tv"></i> TV Series</span>
+                                <span id="resultYear"><i class="fas fa-calendar-alt"></i> 2023</span>
+                                <span id="resultEpisodes"><i class="fas fa-list-ol"></i> 12 Episodes</span>
+                            </div>
+                            <p class="synopsis" id="resultSynopsis">Synopsis goes here...</p>
+                            <div class="tags" id="resultTags">
+                                <span class="tag">Action</span>
+                                <span class="tag">Adventure</span>
+                                <span class="tag">Fantasy</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="result-actions">
+                        <button class="video-btn hidden" id="videoBtn">
+                            <i class="fas fa-play"></i> Preview Scene
+                        </button>
+                        <button class="new-search-btn" id="newSearchBtn">
+                            <i class="fas fa-redo"></i> New Search
+                        </button>
+                    </div>
+                </div>
+                <div class="error hidden" id="error">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Error Analyzing Image</h3>
+                    <p id="errorMessage">An error occurred while processing your image.</p>
+                    <button class="try-again-btn" id="tryAgainBtn">
+                        <i class="fas fa-redo"></i> Try Again
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Dual search powered by Gemini AI and trace.moe</p>
+            <p class="disclaimer">Results may vary between services. Gemini provides descriptions while trace.moe finds exact matches.</p>
+        </footer>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
