@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image to Text with Gemini</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/copytext/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Image to Text with Gemini</h1>
+            <p class="subtitle">Upload any image and Gemini AI will extract the text automatically</p>
+            <p class="subtitle">Serah lu dah, gw dah capek. </p>
+        </header>
+        
+        <div class="converter-container">
+            <div class="upload-section" id="uploadArea">
+                <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                <h3 class="upload-text">Drag & Drop your image here</h3>
+                <p class="upload-subtext">or click to browse files (JPG, PNG supported)</p>
+                <button class="btn btn-primary">
+                    <i class="fas fa-upload"></i> Select Image
+                </button>
+                <input type="file" id="fileInput" accept="image/jpeg, image/png">
+            </div>
+            
+            <div class="loading" id="loadingIndicator">
+                <div class="spinner"></div>
+                <p class="loading-text">Gemini is extracting text from your image...</p>
+            </div>
+            
+            <div class="preview-section" id="previewSection">
+                <div class="image-preview">
+                    <img id="previewImage" src="" alt="Uploaded Image">
+                </div>
+                <div class="text-result">
+                    <div class="text-result-header">
+                        <h3>Extracted Text</h3>
+                        <button class="btn btn-outline" id="copyButton">
+                            <i class="far fa-copy"></i> Copy Text
+                        </button>
+                    </div>
+                    <div class="text-result-content" id="extractedText">
+                        Text will appear here after processing...
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" id="newImageButton">
+                            <i class="fas fa-redo"></i> New Image
+                        </button>
+                        <button class="btn btn-outline" id="downloadButton">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="error-message" id="errorMessage">
+                There was an error processing your image. Please try again.
+            </p>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Powered by Google Gemini AI © 2025</p>
+        <p>Made by Ancient</p>
+    </footer>
+
+    <script src="/copytext/js/script.js"></script>
+<script>
+  document.addEventListener("contextmenu", function (e) {
+    e.preventDefault();
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.ctrlKey && (e.key === "u" || e.key === "s" || e.key === "i" || e.key === "j")) {
+      e.preventDefault();
+    }
+    if (e.key === "F12") {
+      e.preventDefault();
+    }
+  });
+</script>
+
+</body>
+</html>
