@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const imagePreview = document.getElementById('imagePreview');
     const geminiBtn = document.getElementById('geminiBtn');
     const traceMoeBtn = document.getElementById('traceMoeBtn');
+    const googleLensBtn = document.getElementById('googleLensBtn');
     const changeBtn = document.getElementById('changeBtn');
     const resultsContainer = document.getElementById('resultsContainer');
     const loading = document.getElementById('loading');
@@ -39,6 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
     fileInput.addEventListener('change', handleFileSelect);
     geminiBtn.addEventListener('click', () => analyzeImage('gemini'));
     traceMoeBtn.addEventListener('click', () => analyzeImage('tracemoe'));
+    googleLensBtn.addEventListener('click', searchWithGoogleLens);
     changeBtn.addEventListener('click', resetUpload);
     tryAgainBtn.addEventListener('click', resetUpload);
     newSearchBtn.addEventListener('click', resetUpload);
@@ -159,6 +161,40 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    async function searchWithGoogleLens() {
+        if (!uploadedFile) return;
+        
+        previewContainer.classList.add('hidden');
+        resultsContainer.classList.remove('hidden');
+        loading.classList.remove('hidden');
+        loadingText.textContent = "Preparing image for Google Lens search...";
+        
+        try {
+            // Create a temporary URL for the uploaded image
+            const imageUrl = URL.createObjectURL(uploadedFile);
+            
+            // Prepare the Google Lens URL
+            const googleLensUrl = `https://lens.google.com/uploadbyurl?url=${encodeURIComponent(imageUrl)}`;
+            
+            // Display loading message
+            loadingText.textContent = "Redirecting to Google Lens...";
+            
+            // Open Google Lens in a new tab after a small delay
+            setTimeout(() => {
+                window.open(googleLensUrl, '_blank');
+                loading.classList.add('hidden');
+                resultsContainer.classList.add('hidden');
+                
+                // Clean up the temporary URL
+                URL.revokeObjectURL(imageUrl);
+            }, 1000);
+            
+        } catch (err) {
+            console.error('Error with Google Lens:', err);
+            showError('Failed to prepare image for Google Lens. Please try again.');
+        }
+    }
+
     function getBase64(file) {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
@@ -170,7 +206,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function callGeminiAPI(base64Image) {
         const API_KEY = 'AIzaSyBIjo4DrRh7EWLv37Ub1P8lsLPNtKoRQ0c';
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro-vision:generateContent?key=${API_KEY}`;
         
         const requestBody = {
             contents: [{
