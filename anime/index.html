@@ -107,5 +107,20 @@
     </div>
 
     <script src="/anime/js/script.js"></script>
+    <script>
+  document.addEventListener("contextmenu", function (e) {
+    e.preventDefault();
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.ctrlKey && (e.key === "u" || e.key === "s" || e.key === "i" || e.key === "j")) {
+      e.preventDefault();
+    }
+    if (e.key === "F12") {
+      e.preventDefault();
+    }
+  });
+</script>
+
 </body>
 </html>
