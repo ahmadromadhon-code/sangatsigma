@@ -4,6 +4,7 @@
     --accent: #ff4757;
     --gemini-color: #6e6eff;
     --tracemoe-color: #ff7b54;
+    --googlelens-color: #4285F4;
     --text-primary: #ffffff;
     --text-secondary: #b3b3b3;
     --border: #333333;
@@ -202,6 +203,15 @@ button:hover {
     box-shadow: 0 5px 15px rgba(255, 123, 84, 0.3);
 }
 
+.google-lens-btn {
+    background-color: var(--googlelens-color);
+}
+
+.google-lens-btn:hover {
+    background-color: #3367D6;
+    box-shadow: 0 5px 15px rgba(66, 133, 244, 0.3);
+}
+
 .change-btn {
     background-color: transparent;
     border: 1px solid var(--border);
@@ -287,6 +297,11 @@ button:hover {
     color: var(--tracemoe-color);
 }
 
+.googlelens-badge {
+    background-color: rgba(66, 133, 244, 0.2);
+    color: var(--googlelens-color);
+}
+
 .confidence-badge {
     background-color: rgba(75, 181, 67, 0.2);
     color: #4bb543;
@@ -355,6 +370,11 @@ button:hover {
     border-radius: 20px;
     font-size: 0.8rem;
     font-weight: 600;
+}
+
+.time-tag {
+    background-color: rgba(101, 103, 107, 0.2);
+    color: var(--text-secondary);
 }
 
 .result-actions {
