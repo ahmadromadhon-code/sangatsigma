@@ -661,7 +661,7 @@ span {
     top: 22px;
     width: 0;
     z-index: 1;
-    right: 10px;
+    right: 30px;
     border: medium solid #1f1f1f;
     border-width: 10px 0 10px 10px;
     border-color: transparent transparent transparent #1f1f1f;
@@ -674,7 +674,7 @@ span {
     top: 22px;
     width: 0;
     z-index: 1;
-    left: 30px;
+    left: 10px;
     border: medium solid #1f1f1f;
     border-width: 10px 10px 10px 0;
     border-color: transparent #1f1f1f transparent transparent;
