@@ -1,59 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-   <!-- Basic favicon -->
+    <!-- Favicon -->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-
-<!-- Untuk browser modern -->
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-
-<!-- Untuk Apple devices -->
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-
-<!-- Untuk Windows Metro -->
     <meta name="msapplication-TileColor" content="#b74b4b">
     <meta name="msapplication-TileImage" content="mstile-144x144.png">
-
-<!-- Manifest untuk PWA -->
     <link rel="manifest" href="site.webmanifest">
     <title>Portfolio Website</title>
 </head>
 <body>
     <header>
-        <a href="#" class="logo">Ancient</a>
+        <a href="#home" class="logo">Ancient</a>
 
-        <nav>
-            <a href="#" class="active">Home</a>
+        <div class="hamburger-menu">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="#home" class="active">Home</a>
             <a href="#services">Services</a>
             <a href="#skills">Skills</a>
             <a href="#education">Education</a>
             <a href="#experience">Experience</a>
             <a href="#contact">Contact</a>
         </nav>
-      
     </header>
     
-    <section class="home">
+    <section id="home" class="home">
         <div class="home-img">
-            <img src="main.jpg" alt="">
+            <img src="main.jpg" alt="Profile Picture">
         </div>
         <div class="home-content">
             <h1>Hi, It's <span>Ancient</span></h1>
-            <h3 class="typing-text">I'm a <span></span></h3>
+            <h3 class="typing-text">I'm a <span id="typing">Web Developer</span><span class="cursor">|</span></h3>
             <p>Fesnuker sejati aing mah, kalo gabut ya ngoding sama main mobile legends :v</p>
             <div class="social-icons">
-                <a href="https://www.facebook.com/ahmad.nurromadhon.37?mibextid=ZbWKwL"><i class="fa-brands fa-facebook"></i></a>
-                <a href="https://github.com/ahmadromadhon-code/sangatsigma"><i class="fa-brands fa-github"></i></a>
-                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-                <a href="https://www.instagram.com/ahmadromadhon02?igsh=NXB6N25iOW1zZmFt"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.facebook.com/ahmad.nurromadhon.37?mibextid=ZbWKwL" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                <a href="https://github.com/ahmadromadhon-code/sangatsigma" target="_blank"><i class="fa-brands fa-github"></i></a>
+                <a href="#" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="https://www.instagram.com/ahmadromadhon02?igsh=NXB6N25iOW1zZmFt" target="_blank"><i class="fa-brands fa-instagram"></i></a>
             </div>
-            <a href="https://tinyurl.com/Ancientmoon" class="btn">My Project</a>
+            <a href="https://tinyurl.com/Ancientmoon" class="btn" target="_blank">My Project</a>
         </div>
     </section>
 
@@ -92,8 +88,6 @@
                     <span class="html"></span>
                 </div>
             </div>
-        </div>
-        <div class="skills-container">
             <div class="skill-box">
                 <div class="skill-info">
                     <h3 class="skill-title">CSS</h3>
@@ -103,8 +97,6 @@
                     <span class="css"></span>
                 </div>
             </div>
-        </div>
-        <div class="skills-container">
             <div class="skill-box">
                 <div class="skill-info">
                     <h3 class="skill-title">JS</h3>
@@ -114,8 +106,6 @@
                     <span class="javascript"></span>
                 </div>
             </div>
-        </div>
-        <div class="skills-container">
             <div class="skill-box">
                 <div class="skill-info">
                     <h3 class="skill-title">KOTLIN</h3>
@@ -125,8 +115,6 @@
                     <span class="kotlin"></span>
                 </div>
             </div>
-        </div>
-        <div class="skills-container">
             <div class="skill-box">
                 <div class="skill-info">
                     <h3 class="skill-title">REACT JS</h3>
@@ -137,7 +125,6 @@
                 </div>
             </div>
         </div>
-
     </section>
 
     <!-- Education Section -->
@@ -151,8 +138,6 @@
                     <p class="timeline-desc">SDN JENAR KIDUL</p>
                 </div>
             </div>
-        </div>
-        <div class="timeline">
             <div class="timeline-container right">
                 <div class="content">
                     <div class="year"><i class="fa-solid fa-calendar-days"></i> 2017 - 2020</div>
@@ -160,8 +145,6 @@
                     <p class="timeline-desc">SMP NEGERI 8 PURWOREJO</p>
                 </div>
             </div>
-        </div>
-        <div class="timeline">
             <div class="timeline-container left">
                 <div class="content">
                     <div class="year"><i class="fa-solid fa-calendar-days"></i> 2020 - 2023</div>
@@ -169,8 +152,6 @@
                     <p class="timeline-desc">SMK TI KARTIKA CENDEKIA PURWOREJO</p>
                 </div>
             </div>
-        </div>
-        <div class="timeline">
             <div class="timeline-container right">
                 <div class="content">
                     <div class="year"><i class="fa-solid fa-calendar-days"></i> 2023 - 2025</div>
@@ -182,48 +163,41 @@
     </section>
 
     <!-- Experience Section -->
-   <!-- Experience Section -->
-<section id="experience" class="experience">
-    <h2 class="heading">My <span>Experience</span></h2>
-    <div class="experience-container">
-        
-        <!-- Experience 1 -->
-        <div class="experience-box">
-            <div class="exp-content">
-                <span>2022 - Present</span>
-                <h3>Frontend Developer</h3>
-                <p>Perusahaan XYZ</p>
+    <section id="experience" class="experience">
+        <h2 class="heading">My <span>Experience</span></h2>
+        <div class="experience-container">
+            <div class="experience-box">
+                <div class="exp-content">
+                    <span>2022 - Present</span>
+                    <h3>Frontend Developer</h3>
+                    <p>Perusahaan XYZ</p>
+                </div>
+                <div class="exp-desc">
+                    <p>Bertanggung jawab dalam pengembangan dan optimalisasi antarmuka pengguna dengan React.js serta berkolaborasi dengan tim desain dan backend.</p>
+                    <ul>
+                        <li>Membangun lebih dari 10 aplikasi web yang responsif dan interaktif.</li>
+                        <li>Meningkatkan performa loading halaman hingga 40% melalui optimalisasi kode dan aset.</li>
+                        <li>Memimpin tim kecil dalam pengembangan proyek khusus berbasis frontend.</li>
+                    </ul>
+                </div>
             </div>
-            <div class="exp-desc">
-                <p>Bertanggung jawab dalam pengembangan dan optimalisasi antarmuka pengguna dengan React.js serta berkolaborasi dengan tim desain dan backend.</p>
-                <ul>
-                    <li>Membangun lebih dari 10 aplikasi web yang responsif dan interaktif.</li>
-                    <li>Meningkatkan performa loading halaman hingga 40% melalui optimalisasi kode dan aset.</li>
-                    <li>Memimpin tim kecil dalam pengembangan proyek khusus berbasis frontend.</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Experience 2 -->
-        <div class="experience-box">
-            <div class="exp-content">
-                <span>2020 - now</span>
-                <h3>Freelance Web Developer</h3>
-                <p>Self-Employed</p>
-            </div>
-            <div class="exp-desc">
-                <p>Menyediakan layanan pengembangan website kustom untuk klien dari berbagai industri dengan solusi yang disesuaikan.</p>
-                <ul>
-                    <li>Menyelesaikan lebih dari 25 proyek web, mulai dari company profile hingga sistem e-commerce.</li>
-                    <li>Mengembangkan sistem e-commerce dengan fitur custom seperti integrasi pembayaran dan dashboard admin.</li>
-                    <li>Memberikan konsultasi teknis kepada klien terkait strategi pengembangan web yang efektif.</li>
-                </ul>
+            <div class="experience-box">
+                <div class="exp-content">
+                    <span>2020 - now</span>
+                    <h3>Freelance Web Developer</h3>
+                    <p>Self-Employed</p>
+                </div>
+                <div class="exp-desc">
+                    <p>Menyediakan layanan pengembangan website kustom untuk klien dari berbagai industri dengan solusi yang disesuaikan.</p>
+                    <ul>
+                        <li>Menyelesaikan lebih dari 25 proyek web, mulai dari company profile hingga sistem e-commerce.</li>
+                        <li>Mengembangkan sistem e-commerce dengan fitur custom seperti integrasi pembayaran dan dashboard admin.</li>
+                        <li>Memberikan konsultasi teknis kepada klien terkait strategi pengembangan web yang efektif.</li>
+                    </ul>
+                </div>
             </div>
         </div>
-
-    </div>
-</section>
-
+    </section>
 
     <!-- Contact Section -->
     <section id="contact" class="contact">
@@ -256,6 +230,116 @@
         <p>&copy; 2025 Ancient. All Rights Reserved.</p>
     </footer>
 
-<!--     <script src="script.js"></script> -->
+    <script>
+        // Typing Animation
+        const professions = [ "Web Developer", "Developer", "Web Designer", "Fesnuker", "Script Writer"];
+        let currentProfession = 0;
+        const typingElement = document.getElementById('typing');
+        const cursorElement = document.querySelector('.cursor');
+
+        function typeWriter(text, i, cb) {
+            if (i < text.length) {
+                typingElement.textContent = text.substring(0, i + 1);
+                setTimeout(() => typeWriter(text, i + 1, cb), 100);
+            } else {
+                setTimeout(cb, 1500);
+            }
+        }
+
+        function eraseText(cb) {
+            const text = typingElement.textContent;
+            if (text.length > 0) {
+                typingElement.textContent = text.substring(0, text.length - 1);
+                setTimeout(() => eraseText(cb), 50);
+            } else {
+                setTimeout(cb, 500);
+            }
+        }
+
+        function typingAnimation() {
+            const text = professions[currentProfession];
+            typeWriter(text, 0, () => {
+                setTimeout(() => {
+                    eraseText(() => {
+                        currentProfession = (currentProfession + 1) % professions.length;
+                        typingAnimation();
+                    });
+                }, 2000);
+            });
+        }
+
+        // Cursor blink animation
+        setInterval(() => {
+            cursorElement.style.opacity = cursorElement.style.opacity === '0' ? '1' : '0';
+        }, 500);
+
+        // Start typing animation
+        typingAnimation();
+
+        // Navigation functionality
+        const hamburgerMenu = document.querySelector('.hamburger-menu');
+        const navMenu = document.querySelector('.nav-menu');
+        const navLinks = document.querySelectorAll('.nav-menu a');
+
+        // Toggle mobile menu
+        hamburgerMenu.addEventListener('click', () => {
+            hamburgerMenu.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                // Handle smooth scrolling
+                const targetId = link.getAttribute('href');
+                if (targetId !== '#') {
+                    e.preventDefault();
+                    const targetSection = document.querySelector(targetId);
+                    if (targetSection) {
+                        const headerHeight = document.querySelector('header').offsetHeight;
+                        const targetPosition = targetSection.offsetTop - headerHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+
+                // Update active class
+                navLinks.forEach(navLink => navLink.classList.remove('active'));
+                link.classList.add('active');
+
+                // Close mobile menu
+                hamburgerMenu.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Update active link on scroll
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY;
+            
+            // Update header style
+            const header = document.querySelector('header');
+            header.classList.toggle('sticky', scrollPosition > 0);
+            
+            // Update active nav link
+            document.querySelectorAll('section').forEach(section => {
+                const sectionId = section.getAttribute('id');
+                const sectionTop = section.offsetTop - 100;
+                const sectionBottom = sectionTop + section.offsetHeight;
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
