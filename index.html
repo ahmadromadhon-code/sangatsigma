@@ -341,5 +341,71 @@
             });
         });
     </script>
+    <script>
+        // Typing Animation (kode sebelumnya...)
+        
+        // Navigation functionality (kode sebelumnya...)
+        
+        // Section visibility control
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section');
+            
+            // Fungsi untuk memeriksa visibilitas section
+            function checkVisibility() {
+                const scrollPosition = window.scrollY;
+                const windowHeight = window.innerHeight;
+                
+                sections.forEach(section => {
+                    const sectionId = section.getAttribute('id');
+                    const sectionTop = section.offsetTop;
+                    const sectionBottom = sectionTop + section.offsetHeight;
+                    
+                    // Jika section berada dalam viewport atau dekat dengan viewport
+                    if (scrollPosition + windowHeight * 0.7 > sectionTop && 
+                        scrollPosition < sectionBottom + windowHeight * 0.3) {
+                        section.classList.remove('section-hidden');
+                        section.classList.add('section-visible');
+                    } else {
+                        // Sembunyikan semua section kecuali yang sedang aktif
+                        section.classList.remove('section-visible');
+                        section.classList.add('section-hidden');
+                    }
+                });
+                
+                // Pastikan section home selalu terlihat jika di atas
+                const homeSection = document.getElementById('home');
+                if (scrollPosition < windowHeight * 0.5) {
+                    homeSection.classList.remove('section-hidden');
+                    homeSection.classList.add('section-visible');
+                }
+            }
+            
+            // Panggil fungsi pertama kali
+            checkVisibility();
+            
+            // Tambahkan event listener untuk scroll
+            window.addEventListener('scroll', checkVisibility);
+            
+            // Saat mengklik nav link, pastikan section tujuan terlihat
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId.startsWith('#')) {
+                        const targetSection = document.querySelector(targetId);
+                        if (targetSection) {
+                            // Tampilkan section tujuan
+                            sections.forEach(s => {
+                                s.classList.remove('section-visible');
+                                s.classList.add('section-hidden');
+                            });
+                            
+                            targetSection.classList.remove('section-hidden');
+                            targetSection.classList.add('section-visible');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
