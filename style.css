@@ -178,7 +178,26 @@ section {
     min-height: 100vh;
     padding: 10rem 9% 5rem;
     scroll-margin-top: 8rem; /* For offsetting fixed header */
+transition: opacity 0.5s ease, transform 0.5s ease;
 }
+        .section-hidden {
+            opacity: 0;
+            transform: translateY(50px);
+            pointer-events: none;
+            height: 0;
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .section-visible {
+            opacity: 1;
+            transform: translateY(0);
+            height: auto;
+            overflow: visible;
+            padding: inherit;
+            margin: inherit;
+        }
 
 #home {
     padding-top: 15rem; /* Extra padding for home section */
