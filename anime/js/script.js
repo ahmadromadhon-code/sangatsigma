@@ -205,8 +205,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     async function callGeminiAPI(base64Image) {
-        const API_KEY = 'AIzaSyBIjo4DrRh7EWLv37Ub1P8lsLPNtKoRQ0c';
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro-vision:generateContent?key=${API_KEY}`;
+        const API_KEY = 'AIzaSyBVssIJ4Dh-OUXSw-qHY0NS_GPh9ND5Gok';
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
         
         const requestBody = {
             contents: [{
