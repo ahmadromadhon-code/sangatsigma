@@ -1,0 +1,1373 @@
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #8B4513 0%, #D2691E 50%, #CD853F 100%);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+.header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo h1 {
+    color: #8B4513;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Hamburger Button */
+.hamburger-btn {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 99999;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    pointer-events: auto;
+}
+
+.hamburger-btn:hover {
+    background: rgba(139, 69, 19, 0.1);
+}
+
+.hamburger-line {
+    width: 25px;
+    height: 3px;
+    background: #8B4513;
+    margin: 2px 0;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+    transform-origin: center;
+}
+
+/* Hamburger to X animation */
+.hamburger-btn.active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(0px, 7px);
+}
+
+.hamburger-btn.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+    transform: scale(0);
+}
+
+.hamburger-btn.active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(0px, -7px);
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    pointer-events: auto;
+}
+
+/* Keep overlay clickable but don't block hamburger */
+.mobile-menu-overlay.active {
+    display: block;
+    pointer-events: auto;
+}
+
+.mobile-menu-overlay.active {
+    display: block;
+}
+
+/* Navigation Menu - Desktop */
+.nav-menu {
+    display: flex;
+    align-items: center;
+    position: static;
+    width: auto;
+    height: auto;
+    background: none;
+    box-shadow: none;
+    flex-direction: row;
+    gap: 0;
+    padding: 0;
+    overflow: visible;
+}
+
+.mobile-menu-header {
+    display: none;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    margin-right: 2rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: all 0.3s;
+    padding: 0.6rem 1.2rem;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: none;
+    margin: 0;
+    transform: none;
+    font-size: 0.95rem;
+    white-space: nowrap;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: #8B4513;
+    background: rgba(139, 69, 19, 0.1);
+    transform: none;
+}
+
+
+
+
+
+.mobile-search {
+    display: none;
+}
+
+.desktop-search {
+    display: block;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 25px;
+    padding: 0.3rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    width: 200px;
+    font-size: 0.9rem;
+    background: transparent;
+}
+
+.search-box input::placeholder {
+    color: #999;
+    font-size: 0.9rem;
+}
+
+.search-box button {
+    background: #8B4513;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-size: 0.9rem;
+    min-width: 40px;
+}
+
+.search-box button:hover {
+    background: #A0522D;
+}
+
+/* Main Content */
+.main {
+    margin-top: 100px;
+    padding: 2rem 0;
+}
+
+.section {
+    display: none;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 3rem 0;
+    color: white;
+}
+
+.hero h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* Anime Sections */
+.anime-section {
+    margin: 3rem 0;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.anime-section h3 {
+    color: #333;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Section Header with View More Button */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.section-header h3 {
+    margin-bottom: 0;
+}
+
+.view-more-btn {
+    background: linear-gradient(135deg, #0066cc, #004499);
+    color: white;
+    border: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(0, 102, 204, 0.3);
+}
+
+.view-more-btn:hover {
+    background: linear-gradient(135deg, #004499, #0066cc);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.4);
+}
+
+.view-more-btn:active {
+    transform: translateY(0);
+}
+
+.view-more-btn i {
+    font-size: 0.8rem;
+}
+
+/* Anime Grid */
+.anime-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.anime-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.anime-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.anime-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: opacity 0.2s ease;
+    background-color: #f8f9fa;
+    border-radius: 8px 8px 0 0;
+}
+
+.anime-card img:hover {
+    opacity: 0.9;
+}
+
+.anime-card img[data-loading="true"] {
+    opacity: 0.7;
+    filter: brightness(0.8);
+}
+
+.anime-card:hover img[data-loading="true"] {
+    opacity: 0.8;
+}
+
+.anime-card-content {
+    padding: 1rem;
+}
+
+.anime-card h4 {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+    line-height: 1.3;
+}
+
+.anime-card .episode {
+    color: #8B4513;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.anime-card .score {
+    color: #f39c12;
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+}
+
+.anime-card .studio {
+    color: #6c757d;
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+}
+
+.anime-card .release {
+    color: #17a2b8;
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+}
+
+.anime-card .day {
+    color: #8B4513;
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+}
+
+.anime-card .status {
+    color: #28a745;
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+}
+
+/* Loading */
+.loading {
+    display: none;
+    text-align: center;
+    padding: 3rem;
+    color: white;
+}
+
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top: 4px solid white;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Schedule */
+.schedule-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.schedule-day {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.schedule-day h4 {
+    color: #8B4513;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.schedule-anime {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.schedule-anime:hover {
+    color: #8B4513;
+}
+
+/* Genre Grid */
+.genre-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.genre-card {
+    background: white;
+    padding: 1rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.genre-card:hover {
+    background: #8B4513;
+    color: white;
+    transform: translateY(-3px);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 2rem;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.modal .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    z-index: 1000;
+}
+
+/* Prevent modal close from appearing in mobile menu */
+.nav-menu .close {
+    display: none !important;
+}
+
+.modal .close:hover {
+    color: #000;
+}
+
+/* Pagination */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 0;
+    gap: 0.5rem;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: white;
+    padding: 0.5rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.pagination-btn {
+    background: #f8f9fa;
+    color: #8B4513;
+    border: 1px solid #dee2e6;
+    padding: 0.5rem 0.8rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 35px;
+}
+
+.pagination-btn:hover {
+    background: #8B4513;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+}
+
+.pagination-btn.active {
+    background: #8B4513;
+    color: white;
+    border-color: #8B4513;
+}
+
+.pagination-btn.disabled {
+    background: #e9ecef;
+    color: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.pagination-btn.disabled:hover {
+    background: #e9ecef;
+    color: #6c757d;
+    transform: none;
+    box-shadow: none;
+}
+
+.pagination-info {
+    background: linear-gradient(135deg, #8B4513, #D2691E);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 0 0.5rem;
+}
+
+.pagination-ellipsis {
+    color: #6c757d;
+    padding: 0.5rem;
+    font-weight: bold;
+}
+
+/* OtakuDesu Style Pagination */
+.otakudesu-pagination {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: #2c2c2c;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    margin: 2rem auto;
+    width: fit-content;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.pagination-label {
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-right: 0.5rem;
+}
+
+.pagination-page {
+    background: #404040;
+    color: #ffffff;
+    border: 1px solid #555555;
+    padding: 0.4rem 0.8rem;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 35px;
+}
+
+.pagination-page:hover {
+    background: #555555;
+    border-color: #666666;
+    transform: translateY(-1px);
+}
+
+.pagination-page.active {
+    background: #ff6b35;
+    border-color: #ff6b35;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.pagination-page.active:hover {
+    background: #e55a2b;
+    border-color: #e55a2b;
+    transform: none;
+}
+
+.pagination-next {
+    background: #ff6b35;
+    color: #ffffff;
+    border: 1px solid #ff6b35;
+    padding: 0.4rem 1rem;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.2rem;
+}
+
+.pagination-next:hover {
+    background: #e55a2b;
+    border-color: #e55a2b;
+    transform: translateY(-1px);
+}
+
+/* Footer */
+.footer {
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: 3rem;
+}
+
+/* Streaming & Download Styles */
+.streaming-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background: #000;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.streaming-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.download-section {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-left: 4px solid #8B4513;
+    margin-bottom: 1rem;
+}
+
+.download-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.download-link {
+    background: #8B4513;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+}
+
+.download-link:hover {
+    background: #A0522D;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+}
+
+.episode-button, .batch-button {
+    background: #D2691E;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    font-size: 0.9rem;
+}
+
+.episode-button:hover, .batch-button:hover {
+    background: #CD853F;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(210, 105, 30, 0.3);
+}
+
+.quality-header {
+    color: #8B4513;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .nav {
+        padding: 1rem 1.5rem;
+    }
+
+    .nav-links {
+        gap: 1rem;
+        margin-right: 1rem;
+    }
+
+    .search-box input {
+        width: 150px;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav {
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+    }
+
+    /* Show hamburger button */
+    .hamburger-btn {
+        display: flex !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+    }
+
+    /* Hide desktop search */
+    .desktop-search {
+        display: none;
+    }
+
+    /* Mobile Navigation Menu */
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: linear-gradient(135deg, #fff, #f8f9fa);
+        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        transition: right 0.3s ease-in-out;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 0;
+        overflow-y: auto;
+    }
+
+    /* Hide any stray close buttons and unwanted icons in mobile menu */
+    .nav-menu .close,
+    .nav-menu span.close,
+    .nav-menu .fa-tools,
+    .nav-menu .fa-hammer,
+    .nav-menu .fa-wrench,
+    .nav-menu i[class*="fa-"]:not(.fa-scroll) {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+    /* Hide background icons when mobile menu is active */
+    .nav-menu.active ~ * .fa-tools,
+    .nav-menu.active ~ * .fa-hammer,
+    .nav-menu.active ~ * .fa-wrench {
+        display: none !important;
+    }
+
+    .nav-menu.active {
+        right: 0;
+    }
+
+    /* Ensure hamburger button is always visible and functional */
+    .hamburger-btn {
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        display: flex !important;
+        z-index: 10000 !important;
+        position: relative !important;
+    }
+
+    /* Make sure hamburger button stays on top when menu is open */
+    .mobile-menu-overlay.active ~ .nav .hamburger-btn,
+    .nav-menu.active ~ .mobile-menu-overlay ~ .nav .hamburger-btn {
+        z-index: 10000 !important;
+        pointer-events: auto !important;
+        opacity: 1 !important;
+    }
+
+    /* Mobile menu header */
+    .mobile-menu-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #8B4513, #D2691E);
+        color: white;
+        margin-bottom: 1rem;
+        position: relative;
+        z-index: 1001;
+        pointer-events: none;
+    }
+
+    /* Make sure header content is clickable */
+    .mobile-menu-header * {
+        pointer-events: auto;
+    }
+
+    .mobile-menu-header h2 {
+        margin: 0;
+        font-size: 1.2rem;
+    }
+
+    /* Hide any pseudo-elements that might show crossed tools or other icons */
+    .mobile-menu-header::before,
+    .mobile-menu-header::after,
+    .mobile-menu-header *::before,
+    .mobile-menu-header *::after,
+    .nav-menu::before,
+    .nav-menu::after {
+        display: none !important;
+        content: none !important;
+        visibility: hidden !important;
+    }
+
+    /* Close button styles removed - using hamburger only */
+
+    /* Ensure mobile menu close button is not affected by modal close styles */
+    .nav-menu .close-menu-btn {
+        position: relative !important;
+        float: none !important;
+        top: auto !important;
+        right: auto !important;
+        font-weight: normal !important;
+    }
+
+    /* Hide modal close button when inside nav-menu */
+    .nav-menu .close,
+    .nav-menu .modal .close {
+        display: none !important;
+    }
+
+    /* Ensure only mobile menu close button is visible in nav-menu */
+    .nav-menu .close-menu-btn {
+        display: flex !important;
+    }
+
+    /* Mobile nav links */
+    .nav-links {
+        flex-direction: column;
+        gap: 0;
+        padding: 0 1rem;
+    }
+
+    .nav-link {
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 0.5rem;
+        border: 1px solid transparent;
+        transition: all 0.3s;
+        font-size: 1rem;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+        background: linear-gradient(135deg, rgba(139, 69, 19, 0.1), rgba(210, 105, 30, 0.1));
+        border-color: rgba(139, 69, 19, 0.2);
+        transform: translateX(5px);
+    }
+
+
+
+    /* Mobile search */
+    .mobile-search {
+        display: block;
+        padding: 1rem;
+        border-top: 1px solid #eee;
+        margin-top: auto;
+    }
+
+    .mobile-search .search-box {
+        width: 100%;
+    }
+
+    .mobile-search .search-box input {
+        width: 100%;
+        border-radius: 25px 0 0 25px;
+    }
+
+    .mobile-search .search-box button {
+        border-radius: 0 25px 25px 0;
+    }
+
+    .search-box input {
+        width: 200px;
+    }
+
+    .hero h2 {
+        font-size: 2rem;
+    }
+
+    .anime-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 1rem;
+    }
+
+    .streaming-container {
+        height: 250px;
+    }
+
+    .download-links {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+
+    .modal-content {
+        width: 95%;
+        margin: 2% auto;
+        padding: 1rem;
+    }
+
+    .pagination {
+        flex-wrap: wrap;
+        gap: 0.2rem;
+    }
+
+    .pagination-btn {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.8rem;
+        min-width: 30px;
+    }
+
+    .pagination-info {
+        order: -1;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .section-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+
+    .view-more-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 0.8rem 1rem;
+        font-size: 0.8rem;
+    }
+
+    .otakudesu-pagination {
+        flex-wrap: wrap;
+        gap: 0.2rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .pagination-label {
+        font-size: 0.8rem;
+        margin-right: 0.3rem;
+    }
+
+    .pagination-page {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.8rem;
+        min-width: 30px;
+    }
+
+    .pagination-next {
+        padding: 0.3rem 0.8rem;
+        font-size: 0.8rem;
+    }
+}
+
+
+
+
+
+.btn-confirm {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 1rem;
+}
+
+.btn-confirm:hover {
+    background: linear-gradient(135deg, #20c997, #28a745);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+}
+
+.btn-deny {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 1rem;
+}
+
+.btn-deny:hover {
+    background: linear-gradient(135deg, #c82333, #dc3545);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+}
+
+
+
+.refresh-btn {
+    background: linear-gradient(135deg, #17a2b8, #138496);
+    color: white;
+    border: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 2px 8px rgba(23, 162, 184, 0.3);
+}
+
+.refresh-btn:hover {
+    background: linear-gradient(135deg, #138496, #17a2b8);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(23, 162, 184, 0.4);
+}
+
+.refresh-btn i {
+    animation: none;
+    transition: transform 0.3s;
+}
+
+.refresh-btn:hover i {
+    transform: rotate(180deg);
+}
+
+
+
+
+
+/* Toast Animations */
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* Premium Content Styling */
+.premium-badge {
+    background: linear-gradient(135deg, #ffc107, #ff8c00);
+    color: white;
+    padding: 0.3rem 0.7rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.video-source-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.video-source-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Adult Video Player Styles */
+.adult-video-player {
+    background: #000;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    margin: 1rem 0;
+}
+
+.video-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+    flex-wrap: wrap;
+}
+
+.video-btn {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.video-btn:hover {
+    background: #c82333;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
+.video-btn.secondary {
+    background: #6c757d;
+}
+
+.video-btn.secondary:hover {
+    background: #5a6268;
+}
+
+.video-btn.info {
+    background: #17a2b8;
+}
+
+.video-btn.info:hover {
+    background: #138496;
+}
+
+/* Download Cards */
+.download-card {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-left: 4px solid #dc3545;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+}
+
+.download-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.download-btn {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+    color: white;
+    text-decoration: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s;
+}
+
+.download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(220,53,69,0.3);
+    color: white;
+    text-decoration: none;
+}
+
+.copy-btn {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s;
+}
+
+.copy-btn:hover {
+    background: #5a6268;
+    transform: translateY(-2px);
+}
+
+/* Quality Badges */
+.quality-badge {
+    background: #dc3545;
+    color: white;
+    padding: 0.3rem 0.7rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+}
+
+.speed-badge {
+    padding: 0.3rem 0.7rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    color: white;
+}
+
+.speed-very-fast {
+    background: #28a745;
+}
+
+.speed-fast {
+    background: #17a2b8;
+}
+
+.speed-medium {
+    background: #6c757d;
+}
+
+/* Mobile Responsive for New Features */
+@media (max-width: 768px) {
+    .video-controls {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .video-btn {
+        width: 100%;
+        max-width: 250px;
+        justify-content: center;
+    }
+
+    .download-card {
+        padding: 1rem;
+    }
+
+    .premium-badge {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.5rem;
+    }
+}
+
+/* Episode Card Hover Effects */
+.episode-card:hover {
+    border-color: #007bff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,123,255,0.3) !important;
+}
+
+/* Genre Card Hover Effects */
+.genre-card:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(0,123,255,0.4) !important;
+}
+
+/* Schedule Anime Item Hover Effects */
+.schedule-anime-item:hover {
+    border-color: #007bff !important;
+    transform: translateX(5px);
+    box-shadow: 0 4px 15px rgba(0,123,255,0.2) !important;
+}
+
+/* Streaming iframe styles */
+.streaming-container iframe {
+    border-radius: 8px;
+}
+
+/* Download link hover effects */
+.download-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,123,255,0.3);
+}

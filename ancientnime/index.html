@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AncientNime - Anime Streaming</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="video-player.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav">
+                <div class="logo">
+                    <h1><i class="fas fa-scroll"></i> AncientNime</h1>
+                </div>
+
+                <!-- Hamburger Menu Button -->
+                <button class="hamburger-btn" id="hamburgerBtn">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+
+                <!-- Mobile Menu Overlay -->
+                <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+                <!-- Navigation Menu -->
+                <nav class="nav-menu" id="navMenu">
+                    <div class="mobile-menu-header">
+                        <h2><i class="fas fa-scroll"></i> Menu</h2>
+                    </div>
+
+                    <div class="nav-links">
+                        <a href="#home" class="nav-link active">Home</a>
+                        <a href="#ongoing" class="nav-link">Ongoing</a>
+                        <a href="#complete" class="nav-link">Complete</a>
+                        <a href="#schedule" class="nav-link">Schedule</a>
+                        <a href="#genres" class="nav-link">Genres</a>
+
+                    </div>
+
+                    <div class="mobile-search">
+                        <div class="search-box">
+                            <input type="text" id="mobileSearchInput" placeholder="Cari anime...">
+                            <button id="mobileSearchBtn"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- Desktop Search (hidden on mobile) -->
+                <div class="desktop-search">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Cari anime...">
+                        <button id="searchBtn"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Loading Spinner -->
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <p>Loading anime data...</p>
+            </div>
+
+            <!-- Network Status Indicator for Mobile -->
+            <div id="networkStatus" style="display: none; position: fixed; top: 0; left: 0; right: 0; background: #dc3545; color: white; text-align: center; padding: 0.5rem; z-index: 9999; font-size: 0.9rem;">
+                <i class="fas fa-wifi"></i> <span id="networkMessage">Checking connection...</span>
+            </div>
+
+            <!-- Home Section -->
+            <section id="home" class="section active">
+                <div class="hero">
+                    <h2><i class="fas fa-torii-gate"></i> Selamat Datang di AncientNime</h2>
+                    <p>Portal anime klasik dan modern dengan subtitle Indonesia</p>
+
+                    <!-- Feature Highlight -->
+                    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 10px; margin: 2rem 0; backdrop-filter: blur(10px);">
+                        <h3 style="color: white; margin-bottom: 1rem;">🎬 Fitur Utama</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; text-align: left;">
+                            <div style="color: white;">
+                                <i class="fas fa-play-circle" style="color: #FFD700;"></i> <strong>Streaming Online</strong><br>
+                                <small>Tonton langsung di browser</small>
+                            </div>
+                            <div style="color: white;">
+                                <i class="fas fa-download" style="color: #FFD700;"></i> <strong>Download Multi-Quality</strong><br>
+                                <small>360p, 720p, 1080p tersedia</small>
+                            </div>
+                            <div style="color: white;">
+                                <i class="fas fa-archive" style="color: #FFD700;"></i> <strong>Batch Download</strong><br>
+                                <small>Download semua episode sekaligus</small>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                        <p style="color: white; font-size: 0.9rem; margin: 0;">
+                            💡 <strong>Status:</strong> AncientNime API 2025 - Streaming & Download Ready
+                        </p>
+                        <p style="color: rgba(255,255,255,0.8); font-size: 0.8rem; margin: 0.5rem 0 0 0;">
+                            Klik anime di bawah untuk melihat fitur streaming dan download!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Ongoing Anime -->
+                <div class="anime-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-hourglass-half"></i> Anime Ongoing</h3>
+                        <button class="view-more-btn" onclick="showOngoingPage()">
+                            <i class="fas fa-eye"></i> CEK ANIME ON-GOING LAINNYA
+                        </button>
+                    </div>
+                    <div id="ongoingAnime" class="anime-grid">
+                        <!-- Anime cards will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Complete Anime -->
+                <div class="anime-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-archive"></i> Anime Complete</h3>
+                        <button class="view-more-btn" onclick="showCompletePage()">
+                            <i class="fas fa-eye"></i> CEK ANIME SELESAI LAINNYA
+                        </button>
+                    </div>
+                    <div id="completeAnime" class="anime-grid">
+                        <!-- Anime cards will be loaded here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ongoing Section -->
+            <section id="ongoing" class="section">
+                <h2>Anime Ongoing</h2>
+                <div id="ongoingList" class="anime-grid">
+                    <!-- Ongoing anime list -->
+                </div>
+            </section>
+
+            <!-- Complete Section -->
+            <section id="complete" class="section">
+                <h2>Anime Complete</h2>
+                <div id="completeList" class="anime-grid">
+                    <!-- Complete anime list -->
+                </div>
+            </section>
+
+            <!-- Schedule Section -->
+            <section id="schedule" class="section">
+                <h2>Jadwal Rilis</h2>
+                <div id="scheduleList" class="schedule-container">
+                    <!-- Schedule will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Genres Section -->
+            <section id="genres" class="section">
+                <h2>Genre List</h2>
+                <div id="genreList" class="genre-grid">
+                    <!-- Genres will be loaded here -->
+                </div>
+            </section>
+
+
+
+            <!-- Search Results -->
+            <section id="searchResults" class="section">
+                <h2>Hasil Pencarian</h2>
+                <div id="searchList" class="anime-grid">
+                    <!-- Search results -->
+                </div>
+                <!-- Pagination -->
+                <div id="pagination" class="pagination-container">
+                    <!-- Pagination will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Anime Detail Section -->
+            <section id="animeDetail" class="section">
+                <!-- Anime detail content will be loaded here -->
+            </section>
+
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 AncientNime 
+        </div>
+    </footer>
+
+    <script src="video-player.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

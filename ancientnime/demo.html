@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AncientNime - Nekopoi Feature Demo</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .demo-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        .demo-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .demo-section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            border-left: 4px solid #8B4513;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .feature-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #dc3545;
+        }
+        .api-demo {
+            background: #2c2c2c;
+            color: #00ff00;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        .warning-box {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-header">
+            <h1><i class="fas fa-scroll"></i> AncientNime - Nekopoi Feature Demo</h1>
+            <p>Demonstrasi fitur baru konten dewasa dengan sistem keamanan lengkap</p>
+        </div>
+
+        <div class="warning-box">
+            <h2><i class="fas fa-exclamation-triangle"></i> Peringatan</h2>
+            <p>Fitur ini khusus untuk pengguna berusia 18+ tahun dan mengandung konten dewasa</p>
+        </div>
+
+        <div class="demo-section">
+            <h2><i class="fas fa-star"></i> Fitur Utama</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3><i class="fas fa-shield-alt"></i> Age Verification</h3>
+                    <p>Sistem verifikasi usia dengan modal popup dan penyimpanan preferensi pengguna</p>
+                </div>
+                <div class="feature-card">
+                    <h3><i class="fas fa-fire"></i> Latest Content</h3>
+                    <p>Mengambil konten terbaru dari Nekopoi dengan scraper yang terintegrasi</p>
+                </div>
+                <div class="feature-card">
+                    <h3><i class="fas fa-info-circle"></i> Content Details</h3>
+                    <p>Detail lengkap konten termasuk link download dan informasi tambahan</p>
+                </div>
+                <div class="feature-card">
+                    <h3><i class="fas fa-mobile-alt"></i> Responsive Design</h3>
+                    <p>Desain responsif yang bekerja sempurna di desktop dan mobile</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2><i class="fas fa-code"></i> API Endpoints</h2>
+            <div class="api-demo">
+GET /api/nekopoi/latest
+Response: {
+  "status": "success",
+  "total": 10,
+  "data": [
+    {
+      "title": "Content Title",
+      "image": "https://...",
+      "link": "https://..."
+    }
+  ]
+}
+
+GET /api/nekopoi/info/:url
+Response: {
+  "status": "success",
+  "data": {
+    "title": "Content Title",
+    "links": ["download_link1", "download_link2"]
+  }
+}
+
+GET /api/nekopoi/health
+Response: {
+  "status": "success",
+  "message": "Nekopoi service is operational"
+}
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2><i class="fas fa-palette"></i> Design Elements</h2>
+            <p><strong>Color Scheme:</strong></p>
+            <ul>
+                <li>🔴 Red gradient untuk konten dewasa (#dc3545 to #c82333)</li>
+                <li>🟤 Brown untuk konten umum (#8B4513 to #D2691E)</li>
+                <li>⚠️ Warning colors untuk peringatan keamanan</li>
+            </ul>
+            
+            <p><strong>UI Components:</strong></p>
+            <ul>
+                <li>Modal verifikasi usia dengan animasi smooth</li>
+                <li>Cards khusus dengan indikator 🔞</li>
+                <li>Buttons dengan hover effects dan gradients</li>
+                <li>Responsive grid layout</li>
+            </ul>
+        </div>
+
+        <div class="demo-section">
+            <h2><i class="fas fa-cog"></i> Technical Implementation</h2>
+            <p><strong>Backend:</strong></p>
+            <ul>
+                <li>Express.js controller untuk Nekopoi API</li>
+                <li>Cheerio untuk web scraping</li>
+                <li>Error handling dan timeout management</li>
+                <li>CORS handling untuk images</li>
+            </ul>
+            
+            <p><strong>Frontend:</strong></p>
+            <ul>
+                <li>Vanilla JavaScript dengan async/await</li>
+                <li>LocalStorage untuk age verification</li>
+                <li>CSS Grid dan Flexbox untuk layout</li>
+                <li>Font Awesome icons</li>
+            </ul>
+        </div>
+
+        <div class="demo-section">
+            <h2><i class="fas fa-rocket"></i> How to Access</h2>
+            <ol>
+                <li>Buka halaman utama AncientNime</li>
+                <li>Klik menu "Adult (18+)" di navigasi</li>
+                <li>Konfirmasi verifikasi usia</li>
+                <li>Jelajahi konten yang tersedia</li>
+                <li>Klik item untuk melihat detail</li>
+            </ol>
+        </div>
+
+        <div class="warning-box">
+            <h3><i class="fas fa-info-circle"></i> Disclaimer</h3>
+            <p>Fitur ini disediakan untuk tujuan edukasi dan demonstrasi. Pengguna bertanggung jawab untuk mematuhi hukum dan regulasi setempat terkait akses konten dewasa.</p>
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="/" style="background: linear-gradient(135deg, #8B4513, #D2691E); color: white; padding: 1rem 2rem; border-radius: 25px; text-decoration: none; font-weight: 600;">
+                <i class="fas fa-home"></i> Kembali ke Halaman Utama
+            </a>
+        </div>
+    </div>
+</body>
+</html>

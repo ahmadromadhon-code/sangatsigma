@@ -1,0 +1,22 @@
+{
+  "name": "ancientnime-api",
+  "version": "1.0.0",
+  "description": "AncientNime - Anime Streaming API",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "cheerio": "^1.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "nekobocc": "^1.5.1",
+    "nodemon": "^2.0.4",
+    "python-shell": "^5.0.0"
+  }
+}

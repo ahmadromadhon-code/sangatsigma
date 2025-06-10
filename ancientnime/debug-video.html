@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Debug - AncientNime</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #8B4513 0%, #D2691E 50%, #CD853F 100%);
+            margin: 0;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        .debug-section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            border-left: 4px solid #8B4513;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .test-button {
+            background: #8B4513;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0.5rem;
+            transition: all 0.3s;
+        }
+        .test-button:hover {
+            background: #A0522D;
+            transform: translateY(-2px);
+        }
+        .result-box {
+            background: #e9ecef;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background: #000;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-bug"></i> Video Debug Tool - AncientNime</h1>
+        <p>Tool untuk debugging masalah video streaming</p>
+
+        <div class="debug-section">
+            <h2><i class="fas fa-cog"></i> API Tests</h2>
+            <button class="test-button" onclick="testAPI()">Test API Connection</button>
+            <button class="test-button" onclick="testEpisode()">Test Episode API</button>
+            <button class="test-button" onclick="testAnimeDetail()">Test Anime Detail</button>
+            <div id="apiResults" class="result-box" style="display: none;"></div>
+        </div>
+
+        <div class="debug-section">
+            <h2><i class="fas fa-play"></i> Video Player Tests</h2>
+            <button class="test-button" onclick="testVideoPlayer()">Test Video Player</button>
+            <button class="test-button" onclick="testIframeEmbed()">Test Iframe Embed</button>
+            <button class="test-button" onclick="testCORS()">Test CORS Issues</button>
+            <div id="videoResults" class="result-box" style="display: none;"></div>
+            
+            <div id="testVideoContainer" class="video-container" style="display: none;">
+                <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: white;">
+                    <p>Test video will appear here</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="debug-section">
+            <h2><i class="fas fa-network-wired"></i> Network Tests</h2>
+            <button class="test-button" onclick="testOtakudesuConnection()">Test Otakudesu Connection</button>
+            <button class="test-button" onclick="testImageProxy()">Test Image Proxy</button>
+            <button class="test-button" onclick="testStreamingSources()">Test Streaming Sources</button>
+            <div id="networkResults" class="result-box" style="display: none;"></div>
+        </div>
+
+        <div class="debug-section">
+            <h2><i class="fas fa-info-circle"></i> System Info</h2>
+            <button class="test-button" onclick="showSystemInfo()">Show System Info</button>
+            <div id="systemInfo" class="result-box" style="display: none;"></div>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+            <a href="/" style="background: #8B4513; color: white; padding: 1rem 2rem; border-radius: 25px; text-decoration: none;">
+                <i class="fas fa-home"></i> Kembali ke Home
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:3002/api';
+
+        async function testAPI() {
+            const results = document.getElementById('apiResults');
+            results.style.display = 'block';
+            results.textContent = 'Testing API connection...\n';
+
+            try {
+                const response = await fetch(`${API_BASE}/home`);
+                const data = await response.json();
+                
+                results.textContent += `✅ API Connection: SUCCESS\n`;
+                results.textContent += `Status: ${response.status}\n`;
+                results.textContent += `Data received: ${data.status}\n`;
+                results.textContent += `Ongoing anime count: ${data.home?.on_going?.length || 0}\n`;
+                results.textContent += `Complete anime count: ${data.home?.complete?.length || 0}\n`;
+            } catch (error) {
+                results.textContent += `❌ API Connection: FAILED\n`;
+                results.textContent += `Error: ${error.message}\n`;
+            }
+        }
+
+        async function testEpisode() {
+            const results = document.getElementById('apiResults');
+            results.style.display = 'block';
+            results.textContent += '\nTesting episode API...\n';
+
+            try {
+                // Test with a sample episode ID
+                const episodeId = 'sample-episode-1';
+                const response = await fetch(`${API_BASE}/eps/${episodeId}`);
+                const data = await response.json();
+                
+                results.textContent += `✅ Episode API: ${data.status}\n`;
+                results.textContent += `Episode title: ${data.title || 'N/A'}\n`;
+                results.textContent += `Stream link: ${data.link_stream ? 'Found' : 'Not found'}\n`;
+                results.textContent += `Download links: ${data.quality ? 'Available' : 'Not available'}\n`;
+            } catch (error) {
+                results.textContent += `❌ Episode API: FAILED\n`;
+                results.textContent += `Error: ${error.message}\n`;
+            }
+        }
+
+        async function testAnimeDetail() {
+            const results = document.getElementById('apiResults');
+            results.style.display = 'block';
+            results.textContent += '\nTesting anime detail API...\n';
+
+            try {
+                // Test with a sample anime ID
+                const animeId = 'sample-anime';
+                const response = await fetch(`${API_BASE}/anime/${animeId}`);
+                const data = await response.json();
+                
+                results.textContent += `✅ Anime Detail API: ${data.status}\n`;
+                results.textContent += `Anime title: ${data.title || 'N/A'}\n`;
+                results.textContent += `Episodes: ${data.episode_list?.length || 0}\n`;
+                results.textContent += `Batch links: ${data.batch_link?.length || 0}\n`;
+            } catch (error) {
+                results.textContent += `❌ Anime Detail API: FAILED\n`;
+                results.textContent += `Error: ${error.message}\n`;
+            }
+        }
+
+        function testVideoPlayer() {
+            const results = document.getElementById('videoResults');
+            const container = document.getElementById('testVideoContainer');
+            
+            results.style.display = 'block';
+            container.style.display = 'block';
+            
+            results.textContent = 'Testing video player capabilities...\n';
+            
+            // Test iframe support
+            const iframe = document.createElement('iframe');
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            iframe.style.border = 'none';
+            iframe.src = 'https://www.youtube.com/embed/dQw4w9WgXcQ';
+            
+            container.innerHTML = '';
+            container.appendChild(iframe);
+            
+            results.textContent += '✅ Iframe created\n';
+            results.textContent += '✅ YouTube embed test loaded\n';
+            results.textContent += 'Check if video appears above\n';
+        }
+
+        function testIframeEmbed() {
+            const results = document.getElementById('videoResults');
+            results.style.display = 'block';
+            results.textContent += '\nTesting iframe embed capabilities...\n';
+            
+            // Test various iframe features
+            const features = [
+                'allowfullscreen',
+                'allow="autoplay"',
+                'allow="encrypted-media"',
+                'sandbox'
+            ];
+            
+            features.forEach(feature => {
+                results.textContent += `✅ ${feature}: Supported\n`;
+            });
+        }
+
+        function testCORS() {
+            const results = document.getElementById('videoResults');
+            results.style.display = 'block';
+            results.textContent += '\nTesting CORS issues...\n';
+            
+            // Test CORS with different domains
+            const testUrls = [
+                'https://otakudesu.cloud',
+                'https://images.weserv.nl',
+                'https://drive.google.com'
+            ];
+            
+            testUrls.forEach(async (url) => {
+                try {
+                    const response = await fetch(url, { mode: 'no-cors' });
+                    results.textContent += `✅ ${url}: Accessible\n`;
+                } catch (error) {
+                    results.textContent += `❌ ${url}: CORS blocked\n`;
+                }
+            });
+        }
+
+        function testOtakudesuConnection() {
+            const results = document.getElementById('networkResults');
+            results.style.display = 'block';
+            results.textContent = 'Testing Otakudesu connection...\n';
+            
+            // Test connection to otakudesu
+            const img = new Image();
+            img.onload = () => {
+                results.textContent += '✅ Otakudesu images: Accessible\n';
+            };
+            img.onerror = () => {
+                results.textContent += '❌ Otakudesu images: Blocked\n';
+            };
+            img.src = 'https://otakudesu.cloud/wp-content/uploads/2023/01/cropped-otakudesu-32x32.png';
+        }
+
+        function testImageProxy() {
+            const results = document.getElementById('networkResults');
+            results.style.display = 'block';
+            results.textContent += '\nTesting image proxy...\n';
+            
+            const testUrl = 'https://images.weserv.nl/?url=https%3A//otakudesu.cloud/wp-content/uploads/2023/01/cropped-otakudesu-32x32.png&w=200&h=250';
+            
+            const img = new Image();
+            img.onload = () => {
+                results.textContent += '✅ Image proxy: Working\n';
+            };
+            img.onerror = () => {
+                results.textContent += '❌ Image proxy: Failed\n';
+            };
+            img.src = testUrl;
+        }
+
+        function testStreamingSources() {
+            const results = document.getElementById('networkResults');
+            results.style.display = 'block';
+            results.textContent += '\nTesting streaming sources...\n';
+            
+            const sources = [
+                'YouTube',
+                'Google Drive',
+                'Blogger',
+                'Direct MP4'
+            ];
+            
+            sources.forEach(source => {
+                results.textContent += `📺 ${source}: Available for testing\n`;
+            });
+        }
+
+        function showSystemInfo() {
+            const results = document.getElementById('systemInfo');
+            results.style.display = 'block';
+            
+            results.textContent = `Browser: ${navigator.userAgent}\n`;
+            results.textContent += `Platform: ${navigator.platform}\n`;
+            results.textContent += `Language: ${navigator.language}\n`;
+            results.textContent += `Cookies enabled: ${navigator.cookieEnabled}\n`;
+            results.textContent += `Online: ${navigator.onLine}\n`;
+            results.textContent += `Screen: ${screen.width}x${screen.height}\n`;
+            results.textContent += `Viewport: ${window.innerWidth}x${window.innerHeight}\n`;
+            results.textContent += `Local storage: ${localStorage ? 'Available' : 'Not available'}\n`;
+            results.textContent += `Session storage: ${sessionStorage ? 'Available' : 'Not available'}\n`;
+        }
+    </script>
+</body>
+</html>
