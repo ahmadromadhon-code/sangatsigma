@@ -1,0 +1,316 @@
+/* Reset & Fonts */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+}
+
+.container {
+  text-align: center;
+  width: 90%;
+  max-width: 500px;
+}
+
+h1 {
+  color: #2c3e50;
+  margin-bottom: 0.2em;
+}
+
+.subtitle {
+  color: #7f8c8d;
+  margin-bottom: 2em;
+}
+
+/* Speed Test Card */
+.speedtest-card {
+  background: white;
+  border-radius: 15px;
+  padding: 2em;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.test-button {
+  background: #3498db;
+  color: white;
+  padding: 1em 2em;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 2em;
+  transition: all 0.3s;
+  display: inline-block;
+  border: none;
+  font-size: 1em;
+  min-width: 200px;
+}
+
+.test-button:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+}
+
+.test-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+  transform: none;
+}
+
+/* Results Grid */
+.results {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1em;
+}
+
+.result-box {
+  background: #f8f9fa;
+  padding: 1em;
+  border-radius: 10px;
+}
+
+.result-box span {
+  font-size: 1.8em;
+  font-weight: bold;
+  display: block;
+  color: #2c3e50;
+}
+
+.result-box small {
+  color: #7f8c8d;
+}
+
+/* Progress Bar */
+.progress-bar {
+  background: #ecf0f1;
+  border-radius: 50px;
+  height: 10px;
+  margin: 2em 0;
+  overflow: hidden;
+}
+
+.progress-fill {
+  background: linear-gradient(90deg, #2ecc71, #27ae60);
+  height: 100%;
+  width: 0%;
+  transition: width 0.5s;
+}
+
+/* Server Info */
+.server-info {
+  color: #7f8c8d;
+  font-size: 0.9em;
+  margin-top: 1em;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .container {
+    width: 95%;
+    padding: 0 10px;
+  }
+
+  .speedtest-card {
+    padding: 1.5em;
+  }
+
+  .results {
+    grid-template-columns: 1fr;
+    gap: 0.8em;
+  }
+
+  .result-box {
+    padding: 0.8em;
+  }
+
+  .result-box span {
+    font-size: 1.5em;
+  }
+
+  .test-button {
+    padding: 0.8em 1.5em;
+    min-width: 180px;
+    font-size: 0.9em;
+  }
+
+  h1 {
+    font-size: 1.8em;
+  }
+}
+
+/* Loading animation */
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.result-box.loading span {
+  animation: pulse 1.5s infinite;
+}
+
+/* Error state */
+.error {
+  color: #e74c3c !important;
+}
+
+/* Success state */
+.success {
+  color: #2ecc71 !important;
+}
+
+/* Quality indicators */
+.result-box[data-quality="excellent"] {
+  border-left: 4px solid #2ecc71;
+  background: linear-gradient(135deg, #f8fff9, #f0fff4);
+}
+
+.result-box[data-quality="good"] {
+  border-left: 4px solid #3498db;
+  background: linear-gradient(135deg, #f8fcff, #f0f8ff);
+}
+
+.result-box[data-quality="fair"] {
+  border-left: 4px solid #f39c12;
+  background: linear-gradient(135deg, #fffcf8, #fff8f0);
+}
+
+.result-box[data-quality="poor"] {
+  border-left: 4px solid #e74c3c;
+  background: linear-gradient(135deg, #fff8f8, #fff0f0);
+}
+
+/* Enhanced result box styling */
+.result-box {
+  background: #f8f9fa;
+  padding: 1em;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.result-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(52, 152, 219, 0.3), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.result-box.loading::before {
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Real-time speed display */
+.result-box span {
+  font-size: 1.8em;
+  font-weight: bold;
+  display: block;
+  color: #2c3e50;
+  transition: color 0.3s ease;
+}
+
+.result-box.loading span {
+  color: #3498db;
+}
+
+/* Progress bar enhancements */
+.progress-bar {
+  background: #ecf0f1;
+  border-radius: 50px;
+  height: 12px;
+  margin: 2em 0;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.progress-fill {
+  background: linear-gradient(90deg, #2ecc71, #27ae60, #2ecc71);
+  background-size: 200% 100%;
+  height: 100%;
+  width: 0%;
+  transition: width 0.5s ease;
+  animation: progressGlow 2s infinite;
+  border-radius: 50px;
+}
+
+@keyframes progressGlow {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Test details section */
+.test-details {
+  background: white;
+  border-radius: 10px;
+  padding: 1.5em;
+  margin-top: 1em;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1em;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  color: #7f8c8d;
+  font-size: 0.9em;
+}
+
+.detail-item i {
+  color: #3498db;
+  width: 16px;
+  text-align: center;
+}
+
+.detail-item span span {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+/* Animation for showing test details */
+.test-details.show {
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced mobile responsiveness */
+@media (max-width: 600px) {
+  .test-details {
+    grid-template-columns: 1fr;
+    padding: 1em;
+  }
+
+  .detail-item {
+    justify-content: center;
+    text-align: center;
+  }
+}
